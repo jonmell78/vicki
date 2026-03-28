@@ -1015,16 +1015,23 @@
     cards[0].classList.add('expertise-card--active');
   });
 
-  // Mobile: highlight card as it scrolls into view
+  // Mobile: highlight whichever card is most visible at any point
+  const cardRatios = new Map();
+  cards.forEach(card => cardRatios.set(card, 0));
+
   const cardObserver = new IntersectionObserver((entries) => {
     if (!isMobile()) return;
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        cards.forEach(c => c.classList.remove('expertise-card--active'));
-        entry.target.classList.add('expertise-card--active');
-      }
+    entries.forEach(entry => cardRatios.set(entry.target, entry.intersectionRatio));
+    let mostVisible = null;
+    let maxRatio = 0;
+    cardRatios.forEach((ratio, card) => {
+      if (ratio > maxRatio) { maxRatio = ratio; mostVisible = card; }
     });
-  }, { threshold: 0.55 });
+    if (mostVisible && maxRatio > 0) {
+      cards.forEach(c => c.classList.remove('expertise-card--active'));
+      mostVisible.classList.add('expertise-card--active');
+    }
+  }, { threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0] });
   cards.forEach(card => cardObserver.observe(card));
 
   // Smooth nav highlight on scroll
