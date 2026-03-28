@@ -63,17 +63,38 @@
   }
   </script>
 
-  <!-- Favicons -->
+  <!-- Favicons & manifest -->
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
+  <meta name="theme-color" content="#0f1f38" />
+
+  <!-- Geo -->
+  <meta name="geo.region" content="GB-NET" />
+  <meta name="geo.placename" content="Newcastle upon Tyne" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 16px;
+      background: var(--accent);
+      color: var(--white);
+      padding: 8px 16px;
+      border-radius: 0 0 6px 6px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      z-index: 200;
+    }
+    .skip-link:focus { top: 0; }
 
     :root {
       --navy: #0f1f38;
@@ -540,12 +561,12 @@
 
     .contact .section-label { color: #93c5fd; }
 
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: start;
-      margin-top: 48px;
+    .contact-links {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      max-width: 380px;
     }
 
     .contact-intro {
@@ -578,73 +599,6 @@
       justify-content: center;
       flex-shrink: 0;
       font-size: 1rem;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    label {
-      display: block;
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: rgba(255,255,255,0.6);
-      margin-bottom: 6px;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    input, textarea {
-      width: 100%;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 8px;
-      padding: 12px 16px;
-      color: var(--white);
-      font-family: 'Inter', sans-serif;
-      font-size: 0.95rem;
-      transition: border-color 0.2s;
-      outline: none;
-    }
-
-    input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.3); }
-
-    input:focus, textarea:focus { border-color: var(--accent); }
-
-    textarea { resize: vertical; min-height: 120px; }
-
-    .btn-submit {
-      background: var(--accent);
-      color: var(--white);
-      border: none;
-      border-radius: 8px;
-      padding: 14px 28px;
-      font-family: 'Inter', sans-serif;
-      font-weight: 600;
-      font-size: 0.95rem;
-      cursor: pointer;
-      transition: background 0.2s;
-      align-self: flex-start;
-    }
-
-    .btn-submit:hover { background: #1d4ed8; }
-
-    .form-success {
-      display: none;
-      background: rgba(37, 99, 235, 0.2);
-      border: 1px solid rgba(37, 99, 235, 0.4);
-      border-radius: 8px;
-      padding: 16px 20px;
-      color: #93c5fd;
-      font-size: 0.95rem;
     }
 
     /* ── FOOTER ── */
@@ -680,25 +634,30 @@
       .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
       .stat-item:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.08); }
       .stat-item:nth-last-child(-n+2) { border-bottom: none; }
-      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
       .expertise-grid { grid-template-columns: 1fr; }
-      .form-row { grid-template-columns: 1fr; }
       footer { flex-direction: column; gap: 8px; text-align: center; }
     }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">Vicki Park</div>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#expertise">Expertise</a></li>
-    <li><a href="#career">Career</a></li>
-    <li><a href="#contact" class="nav-cta">Get in touch</a></li>
-  </ul>
-</nav>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<!-- HEADER -->
+<header>
+  <nav aria-label="Main navigation">
+    <div class="nav-logo">Vicki Park</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#expertise">Expertise</a></li>
+      <li><a href="#career">Career</a></li>
+      <li><a href="#contact" class="nav-cta">Get in touch</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main-content">
 
 <!-- HERO -->
 <section class="hero" id="top">
@@ -720,14 +679,14 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           Download CV
         </a>
-        <a href="https://www.linkedin.com/in/vickipark1" target="_blank" rel="noopener" class="btn-secondary">
+        <a href="https://www.linkedin.com/in/vickipark1" target="_blank" rel="noopener noreferrer" class="btn-secondary">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
           LinkedIn
         </a>
       </div>
     </div>
     <div class="hero-photo">
-      <img src="vicki-headshot.jpeg" alt="Vicki Park" />
+      <img src="vicki-headshot.jpeg" alt="Vicki Park" width="400" height="400" fetchpriority="high" />
     </div>
   </div>
 </section>
@@ -921,51 +880,25 @@
   <div class="section-inner">
     <div class="section-label">Get in touch</div>
     <h2>Let's talk.</h2>
-    <div class="contact-grid">
-      <div>
-        <p class="contact-intro">
-          I'm always interested in talking to B2B SaaS businesses that take customer success seriously. If you think there could be a fit, or you just want to swap notes on what good looks like in CS, get in touch.
-        </p>
-        <a href="mailto:vicki.park22@gmail.com" class="contact-detail">
-          <div class="contact-detail-icon">✉️</div>
-          vicki.park22@gmail.com
-        </a>
-        <a href="https://www.linkedin.com/in/vickipark1" target="_blank" rel="noopener" class="contact-detail">
-          <div class="contact-detail-icon">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          </div>
-          linkedin.com/in/vickipark1
-        </a>
-      </div>
-      <div>
-        <form id="contact-form" onsubmit="handleSubmit(event)">
-          <div class="form-row">
-            <div>
-              <label for="name">Your name</label>
-              <input type="text" id="name" name="name" placeholder="Jane Smith" required />
-            </div>
-            <div>
-              <label for="company">Company</label>
-              <input type="text" id="company" name="company" placeholder="Acme Corp" />
-            </div>
-          </div>
-          <div>
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="jane@acmecorp.com" required />
-          </div>
-          <div>
-            <label for="message">Message</label>
-            <textarea id="message" name="message" placeholder="Tell Vicki a bit about the role or opportunity..." required></textarea>
-          </div>
-          <button type="submit" class="btn-submit">Send message →</button>
-          <div class="form-success" id="form-success">
-            Thanks, I'll be in touch shortly.
-          </div>
-        </form>
-      </div>
+    <p class="contact-intro">
+      I'm always interested in talking to B2B SaaS businesses that take customer success seriously. If you think there could be a fit, or you just want to swap notes on what good looks like in CS, get in touch.
+    </p>
+    <div class="contact-links">
+      <a href="mailto:vicki.park22@gmail.com" class="contact-detail">
+        <div class="contact-detail-icon">✉️</div>
+        vicki.park22@gmail.com
+      </a>
+      <a href="https://www.linkedin.com/in/vickipark1" target="_blank" rel="noopener noreferrer" class="contact-detail">
+        <div class="contact-detail-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </div>
+        linkedin.com/in/vickipark1
+      </a>
     </div>
   </div>
 </section>
+
+</main>
 
 <!-- FOOTER -->
 <footer>
@@ -974,35 +907,6 @@
 </footer>
 
 <script>
-  function handleSubmit(e) {
-    e.preventDefault();
-    const form = document.getElementById('contact-form');
-    const success = document.getElementById('form-success');
-    const btn = form.querySelector('.btn-submit');
-
-    btn.textContent = 'Sending...';
-    btn.disabled = true;
-
-    // Build mailto link as fallback (no backend yet)
-    const name = document.getElementById('name').value;
-    const company = document.getElementById('company').value;
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
-
-    const subject = encodeURIComponent(`Opportunity via vickipark.co.uk: ${name}${company ? ' · ' + company : ''}`);
-    const body = encodeURIComponent(`Hi Vicki,\n\n${message}\n\nBest,\n${name}${company ? '\n' + company : ''}\n${email}`);
-
-    window.location.href = `mailto:vicki.park22@gmail.com?subject=${subject}&body=${body}`;
-
-    setTimeout(() => {
-      form.reset();
-      btn.textContent = 'Send message →';
-      btn.disabled = false;
-      success.style.display = 'block';
-      setTimeout(() => { success.style.display = 'none'; }, 5000);
-    }, 800);
-  }
-
   // Expertise card highlight
   const cards = document.querySelectorAll('.expertise-card');
   const grid = document.querySelector('.expertise-grid');
