@@ -380,7 +380,8 @@
       transition: border-color 0.2s, box-shadow 0.2s;
     }
 
-    .expertise-card:hover {
+    .expertise-card:hover,
+    .expertise-card--active {
       border-color: var(--accent);
       box-shadow: 0 4px 24px rgba(37, 99, 235, 0.08);
     }
@@ -1003,6 +1004,40 @@
       setTimeout(() => { success.style.display = 'none'; }, 5000);
     }, 800);
   }
+
+  // Expertise card highlight
+  const cards = document.querySelectorAll('.expertise-card');
+  const grid = document.querySelector('.expertise-grid');
+  const isMobile = () => window.matchMedia('(max-width: 900px)').matches;
+
+  // First card active by default on desktop
+  if (!isMobile()) cards[0].classList.add('expertise-card--active');
+
+  // Desktop: move highlight on hover, restore to first on mouse leave
+  cards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      if (isMobile()) return;
+      cards.forEach(c => c.classList.remove('expertise-card--active'));
+      card.classList.add('expertise-card--active');
+    });
+  });
+  grid.addEventListener('mouseleave', () => {
+    if (isMobile()) return;
+    cards.forEach(c => c.classList.remove('expertise-card--active'));
+    cards[0].classList.add('expertise-card--active');
+  });
+
+  // Mobile: highlight card as it scrolls into view
+  const cardObserver = new IntersectionObserver((entries) => {
+    if (!isMobile()) return;
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        cards.forEach(c => c.classList.remove('expertise-card--active'));
+        entry.target.classList.add('expertise-card--active');
+      }
+    });
+  }, { threshold: 0.55 });
+  cards.forEach(card => cardObserver.observe(card));
 
   // Smooth nav highlight on scroll
   const sections = document.querySelectorAll('section[id], div.stats');
