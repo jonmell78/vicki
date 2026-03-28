@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jonmell78.github.io/vicki/sitemap.xml
