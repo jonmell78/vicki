@@ -100,12 +100,12 @@
       --navy: #0f1f38;
       --navy-mid: #1a3356;
       --slate: #4a5e7a;
-      --accent: #2563eb;
+      --accent: #1e50a0;
       --accent-light: #dbeafe;
       --off-white: #f8f9fc;
       --mid-grey: #e2e8f0;
       --text: #1e2d40;
-      --text-muted: #64748b;
+      --text-muted: #5c6b7a;
       --white: #ffffff;
     }
 
@@ -169,7 +169,7 @@
 
     /* ── HERO ── */
     .hero {
-      background: var(--navy);
+      background: radial-gradient(ellipse at 60% 50%, #1a3356 0%, #0f1f38 70%);
       padding: 160px 48px 100px;
       min-height: 100vh;
       display: flex;
@@ -198,7 +198,7 @@
       border-radius: 50%;
       object-fit: cover;
       object-position: center top;
-      border: 4px solid rgba(255,255,255,0.15);
+      border: 4px solid rgba(255,255,255,0.35);
       display: block;
     }
 
@@ -328,10 +328,9 @@
     .section-inner { max-width: 1100px; margin: 0 auto; }
 
     .section-label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
       color: var(--accent);
       margin-bottom: 16px;
     }
@@ -339,7 +338,7 @@
     h2 {
       font-family: 'Fraunces', serif;
       font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-      font-weight: 600;
+      font-weight: 400;
       line-height: 1.2;
       letter-spacing: -0.02em;
       color: var(--navy);
@@ -369,10 +368,10 @@
     .about-text strong { color: var(--text); font-weight: 600; }
 
     .callout {
-      background: var(--navy);
+      background: #eef2fa;
       border-radius: 12px;
+      border-left: 4px solid var(--accent);
       padding: 36px;
-      color: var(--white);
     }
 
     .callout-quote {
@@ -380,13 +379,13 @@
       font-size: 1.35rem;
       font-style: italic;
       line-height: 1.5;
-      color: #93c5fd;
+      color: var(--navy);
       margin-bottom: 20px;
     }
 
     .callout-body {
       font-size: 0.9rem;
-      color: rgba(255,255,255,0.7);
+      color: var(--text-muted);
       line-height: 1.7;
     }
 
@@ -555,7 +554,7 @@
     }
 
     /* ── CONTACT ── */
-    .contact { background: var(--navy); }
+    .contact { background: #1e2d40; }
 
     .contact h2 { color: var(--white); }
 
